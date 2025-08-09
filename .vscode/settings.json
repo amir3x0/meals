@@ -1,0 +1,6 @@
+{
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "editor.inlineSuggest.edits.allowCodeShifting": "always",
+    "editor.inlineSuggest.edits.showCollapsed": true,
+    "editor.quickSuggestionsDelay": 50
+}

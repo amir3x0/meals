@@ -13,7 +13,7 @@ class MealsScreen extends StatelessWidget {
     Widget content = ListView.builder(
       itemCount: meals.length,
       padding: const EdgeInsets.all(8),
-      itemBuilder: (context, index) => MealItem(meal: meals[index]),
+      itemBuilder: (context, index) => MealItem(meal: meals[index],)
     );
 
     if (meals.isEmpty){

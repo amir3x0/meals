@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:meals/models/meal.dart';
 
+/// MealDetailsScreen
+/// ------------------
+/// Displays a rich, scrollable detail page for a single [Meal].
+/// Layout strategy:
+/// - Uses a [CustomScrollView] with a collapsing [SliverAppBar] so the hero
+///   image can expand and then condense into the toolbar when scrolled.
+/// - Remaining content (ingredients & steps) is wrapped in a [SliverToBoxAdapter].
+/// - A placeholder FAB is provided for future actions (e.g. mark favorite).
+/// All UI here is purely presentational; no state mutation occurs.
+
 class MealDetailsScreen extends StatelessWidget {
   const MealDetailsScreen({super.key, required this.meal});
 
@@ -9,6 +19,7 @@ class MealDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // CustomScrollView + Slivers allow the flexible collapsing app bar effect.
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -18,6 +29,7 @@ class MealDetailsScreen extends StatelessWidget {
               titlePadding: const EdgeInsets.only(bottom: 16),
               centerTitle: true,
               title: Container(
+                // Semi-transparent background improves contrast over the image.
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
                 decoration: BoxDecoration(
                   color: Colors.black54,
@@ -47,6 +59,7 @@ class MealDetailsScreen extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(12),
                       child: Hero(
+                        // Tag matches the one used in the list item -> smooth image transition.
                         tag: meal.id,
                         child: Image.network(
                           meal.imageUrl,
@@ -91,12 +104,14 @@ class MealDetailsScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        // Future enhancement: toggle favorite state (would require state mgmt solution)
         onPressed: () {},
         child: const Icon(Icons.favorite_border, color: Colors.white),
       ),
     );
   }
 
+  /// Renders a stylized section title with a subtle underline (bottom border).
   Widget _buildSectionTitle(BuildContext context, String title) {
     return Container(
       width: double.infinity,
@@ -119,6 +134,7 @@ class MealDetailsScreen extends StatelessWidget {
     );
   }
 
+  /// Displays each ingredient as a pill using [Wrap] so items flow to new lines gracefully.
   Widget _buildIngredientsGrid(BuildContext context) {
     return Wrap(
       spacing: 8,
@@ -141,6 +157,7 @@ class MealDetailsScreen extends StatelessWidget {
     );
   }
 
+  /// Builds a numbered list of preparation steps. The step index is derived via [asMap].
   List<Widget> _buildStepsList(BuildContext context) {
     return meal.steps.asMap().entries.map((entry) {
       final index = entry.key;

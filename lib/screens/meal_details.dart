@@ -1,20 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:meals/models/meal.dart';
 
-/// MealDetailsScreen
-/// ------------------
-/// Displays a rich, scrollable detail page for a single [Meal].
-/// Layout strategy:
-/// - Uses a [CustomScrollView] with a collapsing [SliverAppBar] so the hero
-///   image can expand and then condense into the toolbar when scrolled.
-/// - Remaining content (ingredients & steps) is wrapped in a [SliverToBoxAdapter].
-/// - A placeholder FAB is provided for future actions (e.g. mark favorite).
-/// All UI here is purely presentational; no state mutation occurs.
-
 class MealDetailsScreen extends StatelessWidget {
-  const MealDetailsScreen({super.key, required this.meal});
+  const MealDetailsScreen({super.key, required this.meal, required this.onToggleFavorite});
 
   final Meal meal;
+  final void Function(Meal meal) onToggleFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +96,7 @@ class MealDetailsScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         // Future enhancement: toggle favorite state (would require state mgmt solution)
-        onPressed: () {},
+        onPressed: () {onToggleFavorite(meal);},
         child: const Icon(Icons.favorite_border, color: Colors.white),
       ),
     );

@@ -7,12 +7,16 @@ import 'package:meals/models/category.dart' as models;
 
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key, required this.onToggleFavorite});
+  const CategoriesScreen({super.key, required this.onToggleFavorite, required this.avalibaleMeals});
 
   final void Function(Meal meal) onToggleFavorite;
+  final List<Meal> avalibaleMeals;
 
   void _selectCategory(BuildContext context, models.Category category) {
-    final fliteredmeals = dummyMeals.where((meal) => meal.categories.contains(category.id)).toList();
+  // Respect active filters by using the pre-filtered list provided from TabsScreen
+  final fliteredmeals = avalibaleMeals
+    .where((meal) => meal.categories.contains(category.id))
+    .toList();
 
     Navigator.of(context).push(MaterialPageRoute(
       builder: (ctx) => MealsScreen(

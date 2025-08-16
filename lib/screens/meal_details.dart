@@ -12,8 +12,6 @@ class MealDetailsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isFavorite = ref.watch(favoritesProvider).contains(meal);
 
-
-
     return Scaffold(
       // CustomScrollView + Slivers allow the flexible collapsing app bar effect.
       body: CustomScrollView(
@@ -103,16 +101,32 @@ class MealDetailsScreen extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         // Future enhancement: toggle favorite state (would require state mgmt solution)
         onPressed: () {
-          final isFavorite = ref.read(favoritesProvider.notifier).toggleFavoriteStatus(meal);
+          final isFavorite =
+              ref.read(favoritesProvider.notifier).toggleFavoriteStatus(meal);
           ScaffoldMessenger.of(context).clearSnackBars();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(isFavorite ? 'Meal added to favorites!' : 'Meal removed from favorites!'),
+              content: Text(isFavorite
+                  ? 'Meal added to favorites!'
+                  : 'Meal removed from favorites!'),
               duration: const Duration(seconds: 2),
             ),
           );
         },
-        child: Icon(isFavorite ? Icons.favorite : Icons.favorite_border, color: const Color.fromARGB(255, 255, 255, 255)),
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          transitionBuilder: (child, animation) {
+            return ScaleTransition(
+              scale: animation,
+              child: child,
+            );
+          },
+          child: Icon(
+            isFavorite ? Icons.favorite : Icons.favorite_border,
+            key: ValueKey(isFavorite),
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }

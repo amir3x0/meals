@@ -40,7 +40,7 @@ class FiltersScreen extends ConsumerWidget {
                         .withValues(alpha: 0.8),
                   ),
             ),
-            activeColor: Theme.of(context).colorScheme.primary,
+            activeThumbColor: Theme.of(context).colorScheme.primary,
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           ),
@@ -70,7 +70,7 @@ class FiltersScreen extends ConsumerWidget {
                         .withValues(alpha: 0.8),
                   ),
             ),
-            activeColor: Theme.of(context).colorScheme.primary,
+            activeThumbColor: Theme.of(context).colorScheme.primary,
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           ),
@@ -100,7 +100,7 @@ class FiltersScreen extends ConsumerWidget {
                         .withValues(alpha: 0.8),
                   ),
             ),
-            activeColor: Theme.of(context).colorScheme.primary,
+            activeThumbColor: Theme.of(context).colorScheme.primary,
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           ),
@@ -130,7 +130,7 @@ class FiltersScreen extends ConsumerWidget {
                         .withValues(alpha: 0.8),
                   ),
             ),
-            activeColor: Theme.of(context).colorScheme.primary,
+            activeThumbColor: Theme.of(context).colorScheme.primary,
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           ),

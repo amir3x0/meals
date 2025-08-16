@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:meals/models/meal.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:meals/providers/favorites_provider.dart';
 
-class MealDetailsScreen extends StatelessWidget {
-  const MealDetailsScreen({super.key, required this.meal, required this.onToggleFavorite});
+class MealDetailsScreen extends ConsumerWidget {
+  const MealDetailsScreen({super.key, required this.meal});
 
   final Meal meal;
-  final void Function(Meal meal) onToggleFavorite;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       // CustomScrollView + Slivers allow the flexible collapsing app bar effect.
       body: CustomScrollView(
@@ -21,7 +22,8 @@ class MealDetailsScreen extends StatelessWidget {
               centerTitle: true,
               title: Container(
                 // Semi-transparent background improves contrast over the image.
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
                 decoration: BoxDecoration(
                   color: Colors.black54,
                   borderRadius: BorderRadius.circular(20),
@@ -96,7 +98,16 @@ class MealDetailsScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         // Future enhancement: toggle favorite state (would require state mgmt solution)
-        onPressed: () {onToggleFavorite(meal);},
+        onPressed: () {
+          final isFavorite = ref.read(favoritesProvider.notifier).toggleFavoriteStatus(meal);
+          ScaffoldMessenger.of(context).clearSnackBars();
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(isFavorite ? 'Meal added to favorites!' : 'Meal removed from favorites!'),
+              duration: const Duration(seconds: 2),
+            ),
+          );
+        },
         child: const Icon(Icons.favorite_border, color: Colors.white),
       ),
     );

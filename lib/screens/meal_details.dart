@@ -10,6 +10,10 @@ class MealDetailsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isFavorite = ref.watch(favoritesProvider).contains(meal);
+
+
+
     return Scaffold(
       // CustomScrollView + Slivers allow the flexible collapsing app bar effect.
       body: CustomScrollView(
@@ -108,7 +112,7 @@ class MealDetailsScreen extends ConsumerWidget {
             ),
           );
         },
-        child: const Icon(Icons.favorite_border, color: Colors.white),
+        child: Icon(isFavorite ? Icons.favorite : Icons.favorite_border, color: const Color.fromARGB(255, 255, 255, 255)),
       ),
     );
   }

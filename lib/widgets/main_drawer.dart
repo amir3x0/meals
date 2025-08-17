@@ -58,6 +58,16 @@ class MainDrawer extends StatelessWidget{
               onSelectScreen('filters');
             },
           ),
+          const SizedBox(height: 10),
+          ListTile(
+            leading: const Icon(Icons.cloud_upload),
+            title: Text('Upload Recipe', style: Theme.of(context).textTheme.titleMedium!.copyWith(
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
+            )),
+            onTap: () {
+              onSelectScreen('upload');
+            },
+          ),
         ],
       ),
     );

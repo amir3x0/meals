@@ -6,6 +6,7 @@ import 'package:meals/screens/filters.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals/providers/favorites_provider.dart';
 import 'package:meals/providers/filters_provider.dart';
+import 'package:meals/screens/upload.dart';
 
 const Initialfilters = {
   Filter.glutenFree: false,
@@ -39,6 +40,12 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
       await Navigator.of(context).push<Map<Filter, bool>>(
         MaterialPageRoute(
           builder: (ctx) => const FiltersScreen(),
+        ),
+      );
+    } else if (identifier == 'upload') {
+      await Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (ctx) => const UploadRecipeScreen(),
         ),
       );
     }

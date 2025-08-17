@@ -3,6 +3,7 @@ import 'package:meals/models/meal.dart';
 import 'package:meals/widgets/meal_item_trait.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:meals/screens/meal_details.dart';
+import 'dart:io';
 
 class MealItem extends StatelessWidget{
   const MealItem({super.key, required this.meal});
@@ -41,9 +42,15 @@ class MealItem extends StatelessWidget{
         children: [
           Hero(
             tag: meal.id,
-            child: FadeInImage(placeholder: MemoryImage(kTransparentImage),
-              image: NetworkImage(meal.imageUrl),
-              fit: BoxFit.cover, height: 220, width: double.infinity),
+            child: FadeInImage(
+              placeholder: MemoryImage(kTransparentImage),
+              image: meal.imageUrl.startsWith('http')
+                  ? NetworkImage(meal.imageUrl)
+                  : FileImage(File(meal.imageUrl)) as ImageProvider,
+              fit: BoxFit.cover,
+              height: 220,
+              width: double.infinity,
+            ),
           ),
           Positioned(
             bottom: 0,

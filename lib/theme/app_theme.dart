@@ -84,19 +84,19 @@ class AppTheme {
       ),
       segmentedButtonTheme: SegmentedButtonThemeData(
         style: ButtonStyle(
-          shape: MaterialStateProperty.all(
+          shape: WidgetStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           ),
-          side: MaterialStateProperty.resolveWith((states) {
-            final selected = states.contains(MaterialState.selected);
+          side: WidgetStateProperty.resolveWith((states) {
+            final selected = states.contains(WidgetState.selected);
             return BorderSide(color: selected ? cs.primary : cs.outlineVariant);
           }),
-          backgroundColor: MaterialStateProperty.resolveWith((states) {
-            final selected = states.contains(MaterialState.selected);
+          backgroundColor: WidgetStateProperty.resolveWith((states) {
+            final selected = states.contains(WidgetState.selected);
             return selected ? cs.primary.withValues(alpha: 0.12) : cs.surfaceContainerHigh;
           }),
-          foregroundColor: MaterialStateProperty.resolveWith((states) {
-            final selected = states.contains(MaterialState.selected);
+          foregroundColor: WidgetStateProperty.resolveWith((states) {
+            final selected = states.contains(WidgetState.selected);
             return selected ? cs.onSurface : cs.onSurfaceVariant;
           }),
         ),
